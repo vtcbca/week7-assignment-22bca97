@@ -1,1 +1,65 @@
+import csv
+with open('E:\\22bca97\\python\\product_selling.csv','w',newline='') as file:
+    csv_w=csv.writer(file)
+    columns=['Prod_No', 'Prod_Name',' Jan','Feb','Mar','Apr','May','Jun']
+    csv_w.writerow(columns)
+    
+with open('E:\\22bca97\\python\\product_selling.csv','a',newline='') as f :
+    csv_w=csv.writer(f)
+    records=[]
+    for i in range(6):
+        Prod_No=int(input("Enter product number:"))
+        Prod_Name=input("Enter Product Name:")
+        Jan=int(input("Enter product sales in January:"))
+        Feb=int(input("Enter product sales in February:"))
+        Mar=int(input("Enter product sales in March:"))
+        Apr=int(input("Enter product sales in April:"))
+        May=int(input("Enter product sales in May:"))
+        Jun=int(input("Enter product sales in June:"))
+        t=( Prod_No,Prod_Name,Jan,Feb,Mar,Apr,May,Jun)
+        records.append(t)
+    csv_w.writerows(records)
 
+import pandas as pd
+
+#2...
+df=pd.read_csv('E:\\product_selling.csv')
+df
+
+ #3.... 
+df.rename(columns={'Prod_No':'Product No','Prod_Name':'Product Name',' Jan':'January','Feb':'February','Mar':'March','Apr':'April','May':'May','Jun':'June'},inplace=True)
+df
+
+#4.....
+total_sell=df['January']+df['February']+df['March']+df['April']+df['May']+df['June']
+df['Total']=total_sell
+avg_sell=df['Total']/6
+df['Average']=avg_sell
+df
+
+#7.....
+df.head()
+
+#8....
+df.tail()
+
+#9.... 
+df.loc[5:9]
+
+#10.... 
+print(df["Product Name"])
+
+#11.... 
+print(df[["Product No","Product Name","January"]])
+
+#12.....
+print(df[(df["January"]>5000)& (df["February"]>8000)][["Product No","Product Name"]])
+
+#13....
+df["Product Name"].sort_values()
+
+#14....
+df.iloc[1::2]
+
+#15...
+df.iloc[::2]
